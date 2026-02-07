@@ -38,7 +38,6 @@ const Footer = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
       },
     },
   };
@@ -68,12 +67,10 @@ const Footer = () => {
             <h3 className="footer__title">Navigation</h3>
             <nav className="footer__nav">
               {navLinks.map((link) => (
-                <motion.div key={link.name}>
+                <motion.div key={link.name} whileHover={{ x: 5 }} transition={{ type: 'spring', stiffness: 400 }}>
                   <Link
                     to={link.href}
                     className="footer__link"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: 'spring', stiffness: 400 }}
                   >
                     {link.name}
                   </Link>
@@ -87,12 +84,10 @@ const Footer = () => {
             <h3 className="footer__title">Legal</h3>
             <nav className="footer__nav">
               {legalLinks.map((link) => (
-                <motion.div key={link.name}>
+                <motion.div key={link.name} whileHover={{ x: 5 }} transition={{ type: 'spring', stiffness: 400 }}>
                   <Link
                     to={link.href}
                     className="footer__link"
-                    whileHover={{ x: 5 }}
-                    transition={{ type: 'spring', stiffness: 400 }}
                   >
                     {link.name}
                   </Link>

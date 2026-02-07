@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -6,49 +6,9 @@ import Footer from '../components/Footer';
 import logoImage from '../public/Logo_SKYSOUND.png';
 import './Home.css';
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
 const Home = () => {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
   const [email, setEmail] = useState('');
 
-  useEffect(() => {
-    const calculateTimeLeft = (): TimeLeft => {
-      const now = new Date();
-      const targetDate = new Date(2026, 7, 8, 12, 0, 0); // August 8th, 2026, 12:00
-
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        return {
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        };
-      }
-
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    };
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    setTimeLeft(calculateTimeLeft());
-
-    return () => clearInterval(timer);
-  }, []);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +35,6 @@ const Home = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: 'easeOut',
       },
     },
   };

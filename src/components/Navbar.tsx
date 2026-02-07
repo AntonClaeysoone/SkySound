@@ -31,7 +31,7 @@ const Navbar = () => {
       className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
     >
       <div className="navbar__container">
         <Link to="/" className="navbar__logo-link">
