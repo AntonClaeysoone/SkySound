@@ -1,0 +1,425 @@
+.home {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 30%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.hero__gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.hero__logo-container {
+  margin-bottom: 2rem;
+}
+
+.hero__logo {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(214, 33, 43, 0.3));
+}
+
+.hero__title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.hero__info {
+  margin-bottom: 2rem;
+}
+
+.hero__date-location {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.hero__edition {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: rgba(214, 33, 43, 0.9);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero__positioning {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.hero__countdown {
+  margin: 3rem 0;
+  width: 100%;
+  max-width: 900px;
+}
+
+.hero__countdown-label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.countdown__container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.countdown__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.countdown__item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(214, 33, 43, 0.5);
+  box-shadow: 0 10px 30px rgba(214, 33, 43, 0.2);
+}
+
+.countdown__value {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.countdown__label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Highlight Blocks */
+.hero__highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto 4rem;
+}
+
+.highlight-block {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.highlight-block:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(214, 33, 43, 0.3);
+  transform: translateY(-4px);
+}
+
+.highlight-block__title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.highlight-block__text {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+/* Email CTA Section */
+.hero__cta-section {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto 4rem;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero__cta-title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.hero__cta-subtitle {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+
+.hero__email-form {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero__email-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.hero__email-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.hero__email-input:focus {
+  outline: none;
+  border-color: rgba(214, 33, 43, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero__cta-button {
+  background: linear-gradient(135deg, rgba(214, 33, 43, 0.8) 0%, rgba(214, 33, 43, 0.6) 100%);
+  border: 2px solid rgba(214, 33, 43, 0.5);
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero__cta-button:hover {
+  background: linear-gradient(135deg, rgba(214, 33, 43, 1) 0%, rgba(214, 33, 43, 0.8) 100%);
+  border-color: rgba(214, 33, 43, 0.8);
+}
+
+/* Line-up Teaser */
+.hero__lineup-teaser {
+  text-align: center;
+}
+
+.hero__lineup-text {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.hero__lineup-link {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(214, 33, 43, 1);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(214, 33, 43, 0.3);
+  transition: border-color 0.3s ease;
+}
+
+.hero__lineup-link:hover {
+  border-bottom-color: rgba(214, 33, 43, 1);
+}
+
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.hero__scroll-indicator:hover {
+  opacity: 1;
+}
+
+/* Section Styles */
+.section {
+  min-height: 80vh;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section__content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+.section__title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.section__text {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .hero__logo {
+    max-width: 300px;
+  }
+
+  .hero__highlights {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .hero__cta-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero__email-form {
+    flex-direction: column;
+  }
+
+  .hero__cta-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__highlights {
+    gap: 1rem;
+  }
+
+  .highlight-block {
+    padding: 1.5rem;
+  }
+
+  .hero__cta-section {
+    padding: 1.5rem 1rem;
+  }
+}

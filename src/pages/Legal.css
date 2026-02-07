@@ -1,0 +1,125 @@
+.legal-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.legal-page__content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+}
+
+.legal-page__header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legal-page__title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.legal-page__last-updated {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.02em;
+}
+
+.legal-page__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.legal-section {
+  padding: 2rem 0;
+}
+
+.legal-section__title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  border-left: 3px solid rgba(214, 33, 43, 0.8);
+  padding-left: 1rem;
+}
+
+.legal-section__subtitle {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.legal-section__text {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.legal-section__list {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+  list-style-type: disc;
+}
+
+.legal-section__list li {
+  margin-bottom: 0.75rem;
+}
+
+.legal-section__list li strong {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+}
+
+.legal-section__subsection {
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .legal-page__content {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .legal-page__header {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .legal-page__body {
+    gap: 2rem;
+  }
+
+  .legal-section {
+    padding: 1.5rem 0;
+  }
+
+  .legal-section__list {
+    padding-left: 1.5rem;
+  }
+}

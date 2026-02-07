@@ -1,0 +1,58 @@
+.sky-loader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  height: 60px;
+}
+
+.sky-loader__building {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 100%;
+}
+
+.sky-loader__bar {
+  width: 8px;
+  background-color: #D6212B;
+  border-radius: 2px 2px 0 0;
+  animation: sky-loader-build 1.6s ease-in-out infinite;
+}
+
+.sky-loader__bar--1 {
+  height: 30%;
+  animation-delay: 0s;
+}
+
+.sky-loader__bar--2 {
+  height: 50%;
+  animation-delay: 0.2s;
+}
+
+.sky-loader__bar--3 {
+  height: 70%;
+  animation-delay: 0.4s;
+}
+
+.sky-loader__bar--4 {
+  height: 50%;
+  animation-delay: 0.6s;
+}
+
+.sky-loader__bar--5 {
+  height: 30%;
+  animation-delay: 0.8s;
+}
+
+@keyframes sky-loader-build {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
