@@ -1,21 +1,38 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import logoImage from '../public/Logo_SKYSOUND.png';
+import heroLogo from '../public/Assets/01 LOGO SKYSOUND 2026 3.0(Sise Large).png';
+import heroVideo from '../public/Assets/vlaggen in de wind Resolutie.mp4';
+import logoSmall from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png';
+import ticketLayout from '../public/Assets/TICKET LAY OUT - 2026.png';
+import komOpTegenKanker from '../public/Assets/Kom Op Tegen Kanker.png';
+import teamBanner from '../public/Assets/TEAM BANNER - SKYSOUND 26.jpg';
+import gemeenteKortenberg from '../public/Assets/Gemeente Kortenberg.png';
+import thePowerShop from '../public/Assets/The Power Shop.png';
+import uitleendienst from '../public/Assets/Uitleendienst - Vlaamsbrabant.png';
+import events4 from '../public/Assets/4-Events.png';
+import dreamSupport from '../public/Assets/Dream Support.png';
+import kbc from '../public/Assets/KBC.png';
+import leonidas from '../public/Assets/Leonidas.png';
 import './Home.css';
 
+const TICKET_URL = 'https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true';
+
+const partnerLogos = [
+  { name: 'Gemeente Kortenberg', src: gemeenteKortenberg },
+  { name: 'The Power Shop', src: thePowerShop },
+  { name: 'Uitleendienst Vlaams-Brabant', src: uitleendienst },
+  { name: '4-Events', src: events4 },
+  { name: 'Dream Support', src: dreamSupport },
+  { name: 'KBC', src: kbc },
+  { name: 'Leonidas', src: leonidas },
+];
+
 const Home = () => {
-  const [email, setEmail] = useState('');
-
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Email signup logic would go here
-    console.log('Email signup:', email);
-    setEmail('');
-  };
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,102 +60,55 @@ const Home = () => {
     <div className="home">
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Hero Section - Video background (vlaggen in de wind) */}
       <section className="hero" id="home">
-        <div className="hero__background">
-          <motion.div
-            className="hero__gradient"
-            animate={{
-              background: [
-                'radial-gradient(circle at 20% 50%, rgba(214, 33, 43, 0.3) 0%, transparent 50%)',
-                'radial-gradient(circle at 80% 50%, rgba(214, 33, 43, 0.3) 0%, transparent 50%)',
-                'radial-gradient(circle at 50% 20%, rgba(214, 33, 43, 0.3) 0%, transparent 50%)',
-                'radial-gradient(circle at 20% 50%, rgba(214, 33, 43, 0.3) 0%, transparent 50%)',
-              ],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
+        <div className="hero__video-wrap">
+          <video
+            className="hero__video"
+            src={heroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden
           />
+          <div className="hero__video-overlay" aria-hidden />
         </div>
 
         <motion.div
           className="hero__content"
+          style={{ opacity, scale }}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.div className="hero__logo-container" variants={itemVariants}>
             <motion.img
-              src={logoImage}
-              alt="SkySound Festival"
+              src={heroLogo}
+              alt="SkySound Festival 2026"
               className="hero__logo"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
           </motion.div>
 
-          <motion.h1 className="hero__title" variants={itemVariants}>
-            SkySound Festival
-          </motion.h1>
-
-          <motion.div className="hero__info" variants={itemVariants}>
+          <motion.div className="hero__info-composition" variants={itemVariants}>
             <p className="hero__date-location">8 August 2026 · Erps-Kwerps, Belgium</p>
-            <p className="hero__edition">First Edition</p>
           </motion.div>
 
-          <motion.p className="hero__positioning" variants={itemVariants}>
-            An intimate open-air electronic music experience. Curated sound, intentional atmosphere, community-first.
-          </motion.p>
-
-          {/* Highlight Blocks */}
-          <motion.div className="hero__highlights" variants={itemVariants}>
-            <div className="highlight-block">
-              <h3 className="highlight-block__title">Curated Sound</h3>
-              <p className="highlight-block__text">Quality over quantity. Every artist selected with intention.</p>
-            </div>
-            <div className="highlight-block">
-              <h3 className="highlight-block__title">Intimate Setting</h3>
-              <p className="highlight-block__text">Open-air experience for 800–1500. Space to connect.</p>
-            </div>
-            <div className="highlight-block">
-              <h3 className="highlight-block__title">Community First</h3>
-              <p className="highlight-block__text">Built for those who value atmosphere and care.</p>
-            </div>
-          </motion.div>
-
-          {/* Email Signup CTA */}
-          <motion.div className="hero__cta-section" variants={itemVariants}>
-            <h2 className="hero__cta-title">Get Notified</h2>
-            <p className="hero__cta-subtitle">Early access to tickets and line-up announcements</p>
-            <form className="hero__email-form" onSubmit={handleEmailSubmit}>
-              <input
-                type="email"
-                className="hero__email-input"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <motion.button
-                type="submit"
-                className="hero__cta-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Notify Me
-              </motion.button>
-            </form>
-          </motion.div>
-
-          {/* Line-up Teaser */}
-          <motion.div className="hero__lineup-teaser" variants={itemVariants}>
-            <p className="hero__lineup-text">Line-up announcement coming soon</p>
-            <Link to="/lineup" className="hero__lineup-link">
-              Learn more about our curation
+          {/* Hero CTAs - Over Ons + Boarding Pass */}
+          <motion.div className="hero__buttons" variants={itemVariants}>
+            <Link to="/about" className="hero__btn hero__btn--secondary">
+              Over ons
             </Link>
+            <a
+              href={TICKET_URL}
+              className="hero__btn hero__btn--primary vivenu-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Koop je boarding pass hier!
+            </a>
           </motion.div>
         </motion.div>
 
@@ -157,6 +127,106 @@ const Home = () => {
             />
           </svg>
         </motion.div>
+      </section>
+
+      {/* Wat is SkySound? - White section */}
+      <section className="home-section home-section--white" id="wat-is-skysound">
+        <div className="home-section__container">
+          <div className="wat-is">
+            <div className="wat-is__text">
+              <h2 className="wat-is__title">WAT IS SKYSOUND?</h2>
+              <p className="wat-is__body">
+                SkySound is een intiem openluchtfestival waar muziek, ruimte en gemeenschap samenkomen. We kiezen bewust voor kwaliteit boven kwantiteit: elk artiest gekozen met intentie, een setting voor 800–1500 mensen, en de focus op de muziek en het moment. Dit is ons eerste jaar—zonder legacy-verwachtingen bouwen we aan één uitzonderlijke dag in Erps-Kwerps.
+              </p>
+            </div>
+            <div className="wat-is__graphic">
+              <img src={logoSmall} alt="" aria-hidden className="wat-is__logo-graphic" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Goede Doel - White section with Kom op tegen Kanker */}
+      <section className="home-section home-section--white" id="goede-doel">
+        <div className="home-section__container">
+          <div className="goede-doel">
+            <div className="goede-doel__logo-wrap">
+              <img src={komOpTegenKanker} alt="Kom op tegen Kanker" className="goede-doel__logo" />
+            </div>
+            <div className="goede-doel__content">
+              <h2 className="goede-doel__title">GOEDE DOEL.</h2>
+              <p className="goede-doel__text">
+                SkySound steunt Kom op tegen Kanker. Een deel van de opbrengst gaat naar dit goede doel. Samen maken we van onze vlucht niet alleen een feest, maar ook een steun voor wie het nodig heeft.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA - Boarding pass button */}
+      <section className="home-section home-section--white home-section--cta">
+        <div className="home-section__container">
+          <a
+            href={TICKET_URL}
+            className="home-cta-button vivenu-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Koop je boarding pass hier!
+          </a>
+        </div>
+      </section>
+
+      {/* Boarding pass - ticket as separator between white (above) and red (below) */}
+      <section className="home-section home-section--boarding-pass" id="boarding-pass">
+        <div className="home-section__container">
+          <div className="boarding-pass-wrap">
+            <img src={ticketLayout} alt="SkySound Boarding Pass 08/08/2026 Kasteelstraat Erps-Kwerps" className="boarding-pass-img" />
+          </div>
+        </div>
+      </section>
+
+      {/* Meer comfort?! - Red section + VIP CTA */}
+      <section className="home-section home-section--red" id="meer-comfort">
+        <div className="home-section__container">
+          <h2 className="comfort__title">MEER COMFORT?!</h2>
+          <p className="comfort__text">
+            Geniet van het festival met extra comfort. Met een VIP boarding pass krijg je toegang tot een aparte zone, betere voorzieningen en een vleugje extra service. Upgrade je ervaring.
+          </p>
+          <a
+            href={TICKET_URL}
+            className="comfort__button vivenu-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Comfort VIP boarding pass hier!
+          </a>
+        </div>
+      </section>
+
+      {/* Partners - White section, red title */}
+      <section className="home-section home-section--white" id="partners">
+        <div className="home-section__container">
+          <h2 className="partners-title">TROTSE PARTNERS VAN ONZE VLUCHT</h2>
+          <div className="partners-grid">
+            {partnerLogos.map((partner) => (
+              <div key={partner.name} className="partner-logo">
+                <img src={partner.src} alt={partner.name} className="partner-logo__img" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team - Red section */}
+      <section className="home-section home-section--red" id="ons-team">
+        <div className="home-section__container">
+          <h2 className="team-title">SKYSOUND</h2>
+          <p className="team-subtitle">Ons team</p>
+          <div className="team-banner-wrap">
+            <img src={teamBanner} alt="SkySound team" className="team-banner" />
+          </div>
+        </div>
       </section>
 
       <Footer />

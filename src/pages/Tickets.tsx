@@ -50,6 +50,21 @@ const Tickets = () => {
         </motion.div>
 
         <motion.div className="page__body" variants={itemVariants}>
+          {/* Ticket Link - Vivenu Integration */}
+          <section className="content-section tickets-link-section">
+            <a 
+              href="https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true" 
+              className="tickets-link-button vivenu-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buy Tickets
+            </a>
+            <p className="tickets-link-note">
+              Get your tickets now and secure your spot at SkySound Festival 2026.
+            </p>
+          </section>
+
           <section className="content-section">
             <h2 className="content-section__title">Tickets Not Live Yet</h2>
             <p className="content-section__text">
