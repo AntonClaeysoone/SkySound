@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import heroLogo from '../public/Assets/01 LOGO SKYSOUND 2026 3.0(Sise Large).png';
-import heroVideo from '../public/Assets/vlaggen in de wind Resolutie.mp4';
+import heroVideo from '../public/Assets/vlaggen in de wind.mp4';
 import logoSmall from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png';
 import ticketLayout from '../public/Assets/TICKET LAY OUT - 2026.png';
 import komOpTegenKanker from '../public/Assets/Kom Op Tegen Kanker.png';
