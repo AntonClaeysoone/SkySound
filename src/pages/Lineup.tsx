@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Page.css';
+import './Lineup.css';
 
 const Lineup = () => {
   const containerVariants = {
@@ -9,7 +10,7 @@ const Lineup = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
         delayChildren: 0.2,
       },
     },
@@ -26,20 +27,49 @@ const Lineup = () => {
     },
   };
 
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.4 },
+    },
+  };
+
   return (
     <div className="page">
       <Navbar />
       <motion.main
-        className="page__content"
+        className="page__content lineup-page"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.div className="page__header" variants={itemVariants}>
-          <h1 className="page__title">Line-Up</h1>
+          <h1 className="page__title">ARTIST LINE UP</h1>
         </motion.div>
 
         <motion.div className="page__body" variants={itemVariants}>
+          <section className="lineup-cards-section">
+            <motion.div
+              className="lineup-cards-grid"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {Array.from({ length: 8 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="lineup-card"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <span className="lineup-card__text">MORE TBA</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </section>
+
           <section className="content-section">
             <h2 className="content-section__title">Our Curation Philosophy</h2>
             <p className="content-section__text">
@@ -51,41 +81,10 @@ const Lineup = () => {
           </section>
 
           <section className="content-section">
-            <h2 className="content-section__title">Line-Up Status</h2>
-            <p className="content-section__text">
-              <strong>Announcement coming soon.</strong>
-            </p>
-            <p className="content-section__text">
-              We're finalizing the line-up and will share it when it's ready. No teasers, no partial reveals—just a complete announcement when we have something meaningful to share.
-            </p>
-          </section>
-
-          <section className="content-section">
             <h2 className="content-section__title">What to Expect</h2>
             <p className="content-section__text">
               When the line-up is announced, you'll see a carefully curated selection of artists. The focus will be on quality and cohesion, not on how many names we can list. Each artist has been chosen because they fit the SkySound vision.
             </p>
-          </section>
-
-          <section className="content-section">
-            <div className="lineup-placeholders">
-              <div className="lineup-placeholder">
-                <div className="lineup-placeholder__image"></div>
-                <div className="lineup-placeholder__name">Artist</div>
-              </div>
-              <div className="lineup-placeholder">
-                <div className="lineup-placeholder__image"></div>
-                <div className="lineup-placeholder__name">Artist</div>
-              </div>
-              <div className="lineup-placeholder">
-                <div className="lineup-placeholder__image"></div>
-                <div className="lineup-placeholder__name">Artist</div>
-              </div>
-              <div className="lineup-placeholder">
-                <div className="lineup-placeholder__image"></div>
-                <div className="lineup-placeholder__name">Artist</div>
-              </div>
-            </div>
           </section>
         </motion.div>
       </motion.main>

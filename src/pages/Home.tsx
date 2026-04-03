@@ -1,5 +1,4 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import heroLogo from '../public/Assets/01 LOGO SKYSOUND 2026 3.0(Sise Large).png';
@@ -8,26 +7,36 @@ import logoSmall from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png
 import ticketLayout from '../public/Assets/TICKET LAY OUT - 2026.png';
 import komOpTegenKanker from '../public/Assets/Kom Op Tegen Kanker.png';
 import teamBanner from '../public/Assets/TEAM BANNER - SKYSOUND 26.jpg';
-import gemeenteKortenberg from '../public/Assets/Gemeente Kortenberg.png';
-import thePowerShop from '../public/Assets/The Power Shop.png';
-import uitleendienst from '../public/Assets/Uitleendienst - Vlaamsbrabant.png';
-import events4 from '../public/Assets/4-Events.png';
-import dreamSupport from '../public/Assets/Dream Support.png';
-import kbc from '../public/Assets/KBC.png';
-import leonidas from '../public/Assets/Leonidas.png';
 import './Home.css';
 
 const TICKET_URL = 'https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true';
 
-const partnerLogos = [
-  { name: 'Gemeente Kortenberg', src: gemeenteKortenberg },
-  { name: 'The Power Shop', src: thePowerShop },
-  { name: 'Uitleendienst Vlaams-Brabant', src: uitleendienst },
-  { name: '4-Events', src: events4 },
-  { name: 'Dream Support', src: dreamSupport },
-  { name: 'KBC', src: kbc },
-  { name: 'Leonidas', src: leonidas },
+const partnerLogoModules = import.meta.glob('../public/Partners - logos/PNG/*.png', { eager: true, import: 'default' }) as Record<string, string>;
+
+const priorityOrder = [
+  'Kom Op Tegen Kanker',
+  'KBC',
+  'Vinco',
+  'We Invest Leuven',
+  'Hertog Jan',
+  'Abihome',
+  'De Wasstraat',
 ];
+
+const allPartnerLogos = Object.entries(partnerLogoModules)
+  .filter(([path]) => !path.includes('NOG NIET'))
+  .map(([path, src]) => ({
+    name: path.split('/').pop()!.replace('.png', ''),
+    src,
+  }))
+  .sort((a, b) => {
+    const aIdx = priorityOrder.findIndex((p) => a.name.toLowerCase().includes(p.toLowerCase()));
+    const bIdx = priorityOrder.findIndex((p) => b.name.toLowerCase().includes(p.toLowerCase()));
+    if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+    if (aIdx !== -1) return -1;
+    if (bIdx !== -1) return 1;
+    return 0;
+  });
 
 const Home = () => {
   const { scrollY } = useScroll();
@@ -98,9 +107,16 @@ const Home = () => {
 
           {/* Hero CTAs - Over Ons + Boarding Pass */}
           <motion.div className="hero__buttons" variants={itemVariants}>
-            <Link to="/about" className="hero__btn hero__btn--secondary">
+            <a
+              href="#wat-is-skysound"
+              className="hero__btn hero__btn--secondary"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('wat-is-skysound')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Over ons
-            </Link>
+            </a>
             <a
               href={TICKET_URL}
               className="hero__btn hero__btn--primary vivenu-btn"
@@ -156,7 +172,7 @@ const Home = () => {
             <div className="goede-doel__content">
               <h2 className="goede-doel__title">GOEDE DOEL.</h2>
               <p className="goede-doel__text">
-                SkySound steunt Kom op tegen Kanker. Een deel van de opbrengst gaat naar dit goede doel. Samen maken we van onze vlucht niet alleen een feest, maar ook een steun voor wie het nodig heeft.
+                SkySound steunt Kom op tegen Kanker. Samen maken we van onze vlucht niet alleen een feest, maar ook een steun voor wie het nodig heeft.
               </p>
             </div>
           </div>
@@ -204,28 +220,39 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Partners - White section, red title */}
-      <section className="home-section home-section--white" id="partners">
+      {/* Partners - Red section, infinite scrolling marquee */}
+      <section className="home-section home-section--red" id="partners">
         <div className="home-section__container">
-          <h2 className="partners-title">TROTSE PARTNERS VAN ONZE VLUCHT</h2>
-          <div className="partners-grid">
-            {partnerLogos.map((partner) => (
-              <div key={partner.name} className="partner-logo">
-                <img src={partner.src} alt={partner.name} className="partner-logo__img" />
+          <h2 className="partners-title partners-title--white">TROTSE PARTNERS VAN ONZE VLUCHT</h2>
+        </div>
+        <div className="home-partners-marquee">
+          <motion.div
+            className="home-partners-marquee__track"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: 'loop' as const,
+                duration: 120,
+                ease: 'linear',
+              },
+            }}
+          >
+            {[...allPartnerLogos, ...allPartnerLogos].map((partner, index) => (
+              <div key={`${partner.name}-${index}`} className="home-partners-marquee__item">
+                <img src={partner.src} alt={partner.name} className="home-partners-marquee__img" />
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Team - Red section */}
-      <section className="home-section home-section--red" id="ons-team">
-        <div className="home-section__container">
-          <h2 className="team-title">SKYSOUND</h2>
-          <p className="team-subtitle">Ons team</p>
-          <div className="team-banner-wrap">
-            <img src={teamBanner} alt="SkySound team" className="team-banner" />
-          </div>
+      {/* Team - Red section, full width, flush to footer */}
+      <section className="home-section home-section--red home-section--team" id="ons-team">
+        <h2 className="team-title">SKYSOUND</h2>
+        <p className="team-subtitle">Ons team</p>
+        <div className="team-banner-wrap">
+          <img src={teamBanner} alt="SkySound team" className="team-banner" />
         </div>
       </section>
 

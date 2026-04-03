@@ -380,19 +380,18 @@
 /* Boarding pass section - ticket as separator between white and red */
 #boarding-pass {
   background: linear-gradient(to bottom, #fff 0%, #fff 50%, #d6212b 50%, #d6212b 100%);
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 2rem;
 }
 
 #boarding-pass .home-section__container {
   max-width: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .boarding-pass-wrap {
   width: 100%;
-  /* Ticket straddles the 50% line so it visually separates white above and red below */
-  margin-top: -1px;
-  margin-bottom: -1px;
 }
 
 .boarding-pass-img {
@@ -462,37 +461,53 @@
   margin-bottom: 2.5rem;
 }
 
-.partners-grid {
+.partners-title--white {
+  color: #fff;
+}
+
+/* Homepage Partners Marquee */
+.home-partners-marquee {
+  overflow: hidden;
+  width: 100%;
+  padding: 0.5rem 0 1rem;
+}
+
+.home-partners-marquee__track {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   gap: 2rem;
+  width: fit-content;
+  align-items: center;
 }
 
-.partner-logo {
+.home-partners-marquee__item {
   flex: 0 0 auto;
-  max-width: 140px;
-  height: 80px;
+  width: 260px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: transform 0.3s ease;
 }
 
-.partner-logo__img {
+.home-partners-marquee__item:hover {
+  transform: scale(1.08);
+}
+
+.home-partners-marquee__img {
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
   object-fit: contain;
-  filter: grayscale(20%);
 }
 
-.partner-logo__img:hover {
-  filter: grayscale(0);
+
+/* Team - full width, flush to footer */
+.home-section--team {
+  padding: 3rem 0 0;
 }
 
-/* Team */
 .team-title {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
@@ -514,11 +529,11 @@
 }
 
 .team-banner-wrap {
-  max-width: 1000px;
-  margin: 0 auto;
-  border-radius: 8px;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .team-banner {
@@ -742,6 +757,33 @@
   .hero__highlights {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .home-partners-marquee__item {
+    width: 180px;
+    height: 100px;
+    padding: 0.75rem;
+  }
+
+  .home-partners-marquee__track {
+    gap: 1rem;
+  }
+
+  .wat-is {
+    grid-template-columns: 1fr;
+  }
+
+  .wat-is__graphic {
+    display: none;
+  }
+
+  .goede-doel {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .goede-doel__content {
+    text-align: center;
   }
 
   .our-story {
