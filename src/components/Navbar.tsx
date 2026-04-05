@@ -18,12 +18,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const TICKET_URL = 'https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true';
+
   const navLinks = [
-    { name: 'Tickets', href: '/tickets' },
-    { name: 'Line-Up', href: '/lineup' },
-    { name: 'Partners', href: '/partners' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Tickets', href: TICKET_URL, external: true },
+    { name: 'Line-Up', href: '/lineup', external: false },
+    { name: 'Partners', href: '/partners', external: false },
+    { name: 'About', href: '/about', external: false },
+    { name: 'Contact', href: '/contact', external: false },
   ];
 
   return (
@@ -52,12 +54,23 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
-              <Link
-                to={link.href}
-                className={`navbar__link ${location.pathname === link.href ? 'navbar__link--active' : ''}`}
-              >
-                {link.name}
-              </Link>
+              {link.external ? (
+                <a
+                  href={link.href}
+                  className="navbar__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  to={link.href}
+                  className={`navbar__link ${location.pathname === link.href ? 'navbar__link--active' : ''}`}
+                >
+                  {link.name}
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>
@@ -101,13 +114,25 @@ const Navbar = () => {
             }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-            <Link
-              to={link.href}
-              className="navbar__mobile-link"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
+            {link.external ? (
+              <a
+                href={link.href}
+                className="navbar__mobile-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                to={link.href}
+                className="navbar__mobile-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            )}
           </motion.div>
         ))}
       </motion.div>
