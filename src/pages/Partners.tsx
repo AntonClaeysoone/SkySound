@@ -60,12 +60,16 @@ const mainSponsorsList = Object.entries(mainSponsorLogoModules)
     src,
   }));
 
+const matchSponsor = (sponsorName: string, searchKey: string) =>
+  sponsorName.toLowerCase().includes(searchKey.toLowerCase()) ||
+  searchKey.toLowerCase().includes(sponsorName.toLowerCase());
+
 const mainSponsorsRow1 = hoofdsponsorsRow1.map((h) =>
-  mainSponsorsList.find((p) => p.name.toLowerCase().includes(h.toLowerCase()))
+  mainSponsorsList.find((p) => matchSponsor(p.name, h))
 ).filter(Boolean) as { name: string; src: string }[];
 
 const mainSponsorsRow2 = hoofdsponsorsRow2.map((h) =>
-  mainSponsorsList.find((p) => p.name.toLowerCase().includes(h.toLowerCase()))
+  mainSponsorsList.find((p) => matchSponsor(p.name, h))
 ).filter(Boolean) as { name: string; src: string }[];
 
 const allPartners = Object.entries(partnerLogoModules)
