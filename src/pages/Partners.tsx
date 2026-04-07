@@ -17,17 +17,41 @@ const priorityOrder = [
   'De Wasstraat',
 ];
 
-const hoofdsponsors = [
+const hoofdsponsorsRow1 = [
   'KBC',
   'Vinco',
   'We Invest Leuven',
   'Abihome',
+];
+
+const hoofdsponsorsRow2 = [
   'De Wasstraat',
   'Gemeente Kortenberg',
   'Brussels Airport',
   'Coffral',
   'Hertog Jan',
 ];
+
+const hoofdsponsors = [...hoofdsponsorsRow1, ...hoofdsponsorsRow2];
+
+const partnerLinks: Record<string, string> = {
+  'KBC': 'https://www.kbc.be/particulieren/nl/kantoor/4349-KORTENBERG-Bareelplein-2.html',
+  'Vinco': 'https://www.vincoengineering.be',
+  'We Invest Leuven': 'https://weinvest.be/nl-BE/agencies/leuven/33',
+  'Abihome': 'https://abihome.be/nl/ramen',
+  'De Wasstraat': 'https://www.dewasstraat.be',
+  'Gemeente Kortenberg': 'https://www.kortenberg.be',
+  'Brussels Airport': 'https://www.brusselsairport.be/nl/passengers',
+  'Coffral': 'https://www.coffral.com',
+  'Hertog Jan': 'https://www.residentiehertogjan.be',
+};
+
+const getPartnerLink = (name: string): string | undefined => {
+  for (const [key, url] of Object.entries(partnerLinks)) {
+    if (name.toLowerCase().includes(key.toLowerCase())) return url;
+  }
+  return undefined;
+};
 
 const allPartners = Object.entries(partnerLogoModules)
   .filter(([path]) => !path.includes('NOG NIET'))
@@ -82,16 +106,19 @@ const Partners = () => {
         </motion.h1>
 
         <motion.div
-          className="partners-page__grid partners-page__grid--main"
+          className="partners-page__grid partners-page__grid--row1"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {allPartners
-            .filter((p) => hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
+            .filter((p) => hoofdsponsorsRow1.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
             .map((partner) => (
-              <motion.div
+              <motion.a
                 key={partner.name}
+                href={getPartnerLink(partner.name)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="partners-page__card partners-page__card--main"
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
@@ -101,7 +128,34 @@ const Partners = () => {
                   alt={partner.name}
                   className="partners-page__card-logo"
                 />
-              </motion.div>
+              </motion.a>
+            ))}
+        </motion.div>
+
+        <motion.div
+          className="partners-page__grid partners-page__grid--row2"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {allPartners
+            .filter((p) => hoofdsponsorsRow2.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
+            .map((partner) => (
+              <motion.a
+                key={partner.name}
+                href={getPartnerLink(partner.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partners-page__card partners-page__card--main"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={partner.src}
+                  alt={partner.name}
+                  className="partners-page__card-logo"
+                />
+              </motion.a>
             ))}
         </motion.div>
 

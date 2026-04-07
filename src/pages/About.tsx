@@ -36,14 +36,28 @@ const About = () => {
         animate="visible"
       >
         <motion.div className="page__header" variants={itemVariants}>
-          <h1 className="page__title">About SkySound</h1>
+          <h1 className="page__title">WAT IS SKYSOUND?</h1>
         </motion.div>
 
         <motion.div className="page__body" variants={itemVariants}>
           <section className="content-section">
-            <h2 className="content-section__title">WAT IS SKYSOUND?</h2>
             <p className="content-section__text">
-              SKYSOUND is een themafestival met als centraal thema luchtvaart. Het event zet in op muziek, ruimte en community. Zo nemen we je mee in een beleving die al start vóór het event zelf: je ticket is een boarding pass, waarmee je virtueel op reis vertrekt in eigen land, naar SKYSOUND Festival. Op het terrein trekken we dit thema uiteraard volledig door als rode draad, maar daarvoor kom je best zelf ontdekken!
+              SKYSOUND is een vernieuwend themafestival dat muziek, beleving en community samenbrengt in één totaalervaring, met luchtvaart als centraal thema.
+            </p>
+            <p className="content-section__text">
+              Vanaf het moment dat je je ticket ontvangt, start de beleving. Je ticket fungeert als een boarding pass, waarmee je symbolisch vertrekt op reis. Geen klassieke festivalervaring, maar een doordachte journey waarin bezoekers van begin tot einde worden ondergedompeld in het thema. Op het terrein zelf wordt deze lijn volledig doorgetrokken, met oog voor detail in aankleding, sfeer en concept.
+            </p>
+            <p className="content-section__text">
+              SKYSOUND wil méér zijn dan enkel een festival. Het is een plek waar mensen samenkomen, verbinden en herinneringen creëren. Tegelijk draagt het event een duidelijke maatschappelijke missie: met de organisatie steunen we Kom op tegen Kanker.
+            </p>
+            <p className="content-section__text">
+              De roots van SKYSOUND liggen in de covidperiode, waarin het concept ontstond als livestreamplatform. In een tijd waarin live events stil lagen, bood SKYSOUND artiesten een podium vanuit unieke locaties in Leuven, zoals M Leuven, OPEK aan de Vaart en de Velodroom. Artiesten zoals Amber Broos, Voltage en Tola OG maakten hier deel van uit en bereikten zo toch hun publiek.
+            </p>
+            <p className="content-section__text">
+              Vandaag zet SKYSOUND de volgende stap, met zijn allereerste fysieke editie. Deze gaat door in Erps-Kwerps, op een unieke locatie onder de aanvliegroute van Zaventem. Dit zorgt voor een uitzonderlijke setting waarbij vliegtuigen op lage hoogte overvliegen terwijl bezoekers genieten van muziek en sfeer op het terrein.
+            </p>
+            <p className="content-section__text">
+              Met een zorgvuldig gecureerde line-up, een sterk uitgewerkt thema en een duidelijke visie wil SKYSOUND een ervaring neerzetten die blijft hangen — een festival dat je niet alleen bezoekt, maar écht beleeft.
             </p>
           </section>
         </motion.div>
