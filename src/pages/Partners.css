@@ -81,6 +81,14 @@ a.partners-page__card {
   filter: grayscale(0%);
 }
 
+.partners-page__card-logo--color {
+  filter: none;
+}
+
+.partners-page__card:hover .partners-page__card-logo--color {
+  filter: none;
+}
+
 /* Partner Worden Section */
 .partner-worden {
   background: #fff;

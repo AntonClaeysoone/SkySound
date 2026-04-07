@@ -6,6 +6,7 @@ import logoImage from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png
 import './Partners.css';
 
 const partnerLogoModules = import.meta.glob('../public/Partners - logos/PNG/*.png', { eager: true, import: 'default' }) as Record<string, string>;
+const mainSponsorLogoModules = import.meta.glob('../public/mainsponsors/*.png', { eager: true, import: 'default' }) as Record<string, string>;
 
 const priorityOrder = [
   'Kom Op Tegen Kanker',
@@ -53,12 +54,27 @@ const getPartnerLink = (name: string): string | undefined => {
   return undefined;
 };
 
+const mainSponsorsList = Object.entries(mainSponsorLogoModules)
+  .map(([path, src]) => ({
+    name: path.split('/').pop()!.replace(/\s*1\.png$/, '').replace('.png', ''),
+    src,
+  }));
+
+const mainSponsorsRow1 = hoofdsponsorsRow1.map((h) =>
+  mainSponsorsList.find((p) => p.name.toLowerCase().includes(h.toLowerCase()))
+).filter(Boolean) as { name: string; src: string }[];
+
+const mainSponsorsRow2 = hoofdsponsorsRow2.map((h) =>
+  mainSponsorsList.find((p) => p.name.toLowerCase().includes(h.toLowerCase()))
+).filter(Boolean) as { name: string; src: string }[];
+
 const allPartners = Object.entries(partnerLogoModules)
   .filter(([path]) => !path.includes('NOG NIET'))
   .map(([path, src]) => ({
     name: path.split('/').pop()!.replace('.png', ''),
     src,
   }))
+  .filter((p) => !hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
   .sort((a, b) => {
     const aIdx = priorityOrder.findIndex((p) => a.name.toLowerCase().includes(p.toLowerCase()));
     const bIdx = priorityOrder.findIndex((p) => b.name.toLowerCase().includes(p.toLowerCase()));
@@ -111,9 +127,7 @@ const Partners = () => {
           initial="hidden"
           animate="visible"
         >
-          {allPartners
-            .filter((p) => hoofdsponsorsRow1.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
-            .map((partner) => (
+          {mainSponsorsRow1.map((partner) => (
               <motion.a
                 key={partner.name}
                 href={getPartnerLink(partner.name)}
@@ -126,7 +140,7 @@ const Partners = () => {
                 <img
                   src={partner.src}
                   alt={partner.name}
-                  className="partners-page__card-logo"
+                  className="partners-page__card-logo partners-page__card-logo--color"
                 />
               </motion.a>
             ))}
@@ -138,9 +152,7 @@ const Partners = () => {
           initial="hidden"
           animate="visible"
         >
-          {allPartners
-            .filter((p) => hoofdsponsorsRow2.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
-            .map((partner) => (
+          {mainSponsorsRow2.map((partner) => (
               <motion.a
                 key={partner.name}
                 href={getPartnerLink(partner.name)}
@@ -153,7 +165,7 @@ const Partners = () => {
                 <img
                   src={partner.src}
                   alt={partner.name}
-                  className="partners-page__card-logo"
+                  className="partners-page__card-logo partners-page__card-logo--color"
                 />
               </motion.a>
             ))}
@@ -165,9 +177,7 @@ const Partners = () => {
           initial="hidden"
           animate="visible"
         >
-          {allPartners
-            .filter((p) => !hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
-            .map((partner) => (
+          {allPartners.map((partner) => (
               <motion.div
                 key={partner.name}
                 className="partners-page__card"
