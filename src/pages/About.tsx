@@ -41,34 +41,9 @@ const About = () => {
 
         <motion.div className="page__body" variants={itemVariants}>
           <section className="content-section">
-            <h2 className="content-section__title">Why SkySound Exists</h2>
+            <h2 className="content-section__title">WAT IS SKYSOUND?</h2>
             <p className="content-section__text">
-              SkySound was born from a simple observation: the best festival experiences happen when music, space, and community align. Too often, electronic music events prioritize scale over atmosphere, quantity over quality. We wanted to create something different.
-            </p>
-            <p className="content-section__text">
-              Our vision is straightforward—an intimate open-air setting where every artist is chosen with intention, where the crowd size allows for genuine connection, and where the focus remains on the music and the moment.
-            </p>
-          </section>
-
-          <section className="content-section">
-            <h2 className="content-section__title">What Makes This Different</h2>
-            <p className="content-section__text">
-              We're not trying to be everything to everyone. SkySound is built for those who value:
-            </p>
-            <ul className="content-section__list">
-              <li><strong>Quality curation:</strong> Every artist on the line-up is there for a reason, not to fill space.</li>
-              <li><strong>Intimate scale:</strong> 800–1500 people means you can move, breathe, and actually experience the music.</li>
-              <li><strong>Care in details:</strong> From sound quality to site layout, we're thinking about your experience, not just ticket sales.</li>
-            </ul>
-          </section>
-
-          <section className="content-section">
-            <h2 className="content-section__title">First Edition, Clear Intention</h2>
-            <p className="content-section__text">
-              This is our first year. That's not a limitation—it's an opportunity. Without legacy expectations, we can focus purely on what matters: creating an exceptional day of music in an intimate setting.
-            </p>
-            <p className="content-section__text">
-              We're building SkySound with intention, not hype. Every decision is made with the experience in mind. This first edition sets the foundation for what SkySound will become.
+              SKYSOUND is een themafestival met als centraal thema luchtvaart. Het event zet in op muziek, ruimte en community. Zo nemen we je mee in een beleving die al start vóór het event zelf: je ticket is een boarding pass, waarmee je virtueel op reis vertrekt in eigen land, naar SKYSOUND Festival. Op het terrein trekken we dit thema uiteraard volledig door als rode draad, maar daarvoor kom je best zelf ontdekken!
             </p>
           </section>
         </motion.div>

@@ -152,7 +152,7 @@ const Home = () => {
             <div className="wat-is__text">
               <h2 className="wat-is__title">WAT IS SKYSOUND?</h2>
               <p className="wat-is__body">
-                SkySound is een intiem openluchtfestival waar muziek, ruimte en gemeenschap samenkomen. We kiezen bewust voor kwaliteit boven kwantiteit: elk artiest gekozen met intentie, een setting voor 800–1500 mensen, en de focus op de muziek en het moment. Dit is ons eerste jaar—zonder legacy-verwachtingen bouwen we aan één uitzonderlijke dag in Erps-Kwerps.
+                SKYSOUND is een themafestival met als centraal thema luchtvaart. Het event zet in op muziek, ruimte en community. Zo nemen we je mee in een beleving die al start vóór het event zelf: je ticket is een boarding pass, waarmee je virtueel op reis vertrekt in eigen land, naar SKYSOUND Festival. Op het terrein trekken we dit thema uiteraard volledig door als rode draad, maar daarvoor kom je best zelf ontdekken!
               </p>
             </div>
             <div className="wat-is__graphic">

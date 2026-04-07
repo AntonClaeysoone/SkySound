@@ -17,6 +17,18 @@ const priorityOrder = [
   'De Wasstraat',
 ];
 
+const hoofdsponsors = [
+  'KBC',
+  'Vinco',
+  'We Invest Leuven',
+  'Abihome',
+  'De Wasstraat',
+  'Gemeente Kortenberg',
+  'Brussels Airport',
+  'Coffral',
+  'Hertog Jan',
+];
+
 const allPartners = Object.entries(partnerLogoModules)
   .filter(([path]) => !path.includes('NOG NIET'))
   .map(([path, src]) => ({
@@ -70,25 +82,51 @@ const Partners = () => {
         </motion.h1>
 
         <motion.div
-          className="partners-page__grid"
+          className="partners-page__grid partners-page__grid--main"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {allPartners.map((partner) => (
-            <motion.div
-              key={partner.name}
-              className="partners-page__card"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-            >
-              <img
-                src={partner.src}
-                alt={partner.name}
-                className="partners-page__card-logo"
-              />
-            </motion.div>
-          ))}
+          {allPartners
+            .filter((p) => hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
+            .map((partner) => (
+              <motion.div
+                key={partner.name}
+                className="partners-page__card partners-page__card--main"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={partner.src}
+                  alt={partner.name}
+                  className="partners-page__card-logo"
+                />
+              </motion.div>
+            ))}
+        </motion.div>
+
+        <motion.div
+          className="partners-page__grid partners-page__grid--regular"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {allPartners
+            .filter((p) => !hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
+            .map((partner) => (
+              <motion.div
+                key={partner.name}
+                className="partners-page__card"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={partner.src}
+                  alt={partner.name}
+                  className="partners-page__card-logo"
+                />
+              </motion.div>
+            ))}
         </motion.div>
 
         {/* Partner worden? */}
