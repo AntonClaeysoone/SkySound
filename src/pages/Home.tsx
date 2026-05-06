@@ -11,7 +11,7 @@ import './Home.css';
 
 const TICKET_URL = 'https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true';
 
-const partnerLogoModules = import.meta.glob('../public/Partners - logos/**/*.{png,jpg,jpeg}', {
+const partnerLogoModules = import.meta.glob('../public/Partners - logos/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;

@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import logoImage from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png';
 import './Partners.css';
 
-const partnerLogoModules = import.meta.glob('../public/Partners - logos/**/*.{png,jpg,jpeg}', {
+const partnerLogoModules = import.meta.glob('../public/Partners - logos/*.{png,jpg,jpeg}', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;
