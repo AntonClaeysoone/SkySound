@@ -5,7 +5,10 @@ import Footer from '../components/Footer';
 import logoImage from '../public/Assets/03 LOGO SKYSOUND 2026 3.(Sise Small).png';
 import './Partners.css';
 
-const partnerLogoModules = import.meta.glob('../public/Partners - logos/PNG/*.png', { eager: true, import: 'default' }) as Record<string, string>;
+const partnerLogoModules = import.meta.glob('../public/Partners - logos/**/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
 const mainSponsorLogoModules = import.meta.glob('../public/mainsponsors/*.png', { eager: true, import: 'default' }) as Record<string, string>;
 
 const priorityOrder = [
@@ -72,10 +75,18 @@ const mainSponsorsRow2 = hoofdsponsorsRow2.map((h) =>
   mainSponsorsList.find((p) => matchSponsor(p.name, h))
 ).filter(Boolean) as { name: string; src: string }[];
 
+const basenameNoExt = (path: string) =>
+  path
+    .split('/')
+    .pop()!
+    .replace(/\.(png|jpg|jpeg)$/i, '')
+    .trim();
+
 const allPartners = Object.entries(partnerLogoModules)
   .filter(([path]) => !path.includes('NOG NIET'))
   .map(([path, src]) => ({
-    name: path.split('/').pop()!.replace('.png', ''),
+    path,
+    name: basenameNoExt(path),
     src,
   }))
   .filter((p) => !hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
@@ -183,7 +194,7 @@ const Partners = () => {
         >
           {allPartners.map((partner) => (
               <motion.div
-                key={partner.name}
+                key={partner.path}
                 className="partners-page__card"
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}

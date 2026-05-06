@@ -11,7 +11,10 @@ import './Home.css';
 
 const TICKET_URL = 'https://shop.ticket.monster/event/skysound-festival-jzuhmm?useEmbed=true';
 
-const partnerLogoModules = import.meta.glob('../public/Partners - logos/PNG/*.png', { eager: true, import: 'default' }) as Record<string, string>;
+const partnerLogoModules = import.meta.glob('../public/Partners - logos/**/*.{png,jpg,jpeg}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
 
 const priorityOrder = [
   'Kom Op Tegen Kanker',
@@ -26,7 +29,12 @@ const priorityOrder = [
 const allPartnerLogos = Object.entries(partnerLogoModules)
   .filter(([path]) => !path.includes('NOG NIET'))
   .map(([path, src]) => ({
-    name: path.split('/').pop()!.replace('.png', ''),
+    path,
+    name: path
+      .split('/')
+      .pop()!
+      .replace(/\.(png|jpg|jpeg)$/i, '')
+      .trim(),
     src,
   }))
   .sort((a, b) => {
@@ -239,7 +247,7 @@ const Home = () => {
             }}
           >
             {[...allPartnerLogos, ...allPartnerLogos].map((partner, index) => (
-              <div key={`${partner.name}-${index}`} className="home-partners-marquee__item">
+              <div key={`${partner.path}-${index}`} className="home-partners-marquee__item">
                 <img src={partner.src} alt={partner.name} className="home-partners-marquee__img" />
               </div>
             ))}
