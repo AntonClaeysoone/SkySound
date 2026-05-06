@@ -73,20 +73,6 @@ a.partners-page__card {
   max-width: 85%;
   max-height: 85%;
   object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
-
-.partners-page__card:hover .partners-page__card-logo {
-  filter: grayscale(0%);
-}
-
-.partners-page__card-logo--color {
-  filter: none;
-}
-
-.partners-page__card:hover .partners-page__card-logo--color {
-  filter: none;
 }
 
 /* Partner Worden Section */

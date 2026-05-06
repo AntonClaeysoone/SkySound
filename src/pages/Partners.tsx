@@ -36,8 +36,6 @@ const hoofdsponsorsRow2 = [
   'Hertog Jan',
 ];
 
-const hoofdsponsors = [...hoofdsponsorsRow1, ...hoofdsponsorsRow2];
-
 const partnerLinks: Record<string, string> = {
   'KBC': 'https://www.kbc.be/particulieren/nl/kantoor/4349-KORTENBERG-Bareelplein-2.html',
   'Vinco': 'https://www.vincoengineering.be',
@@ -89,7 +87,6 @@ const allPartners = Object.entries(partnerLogoModules)
     name: basenameNoExt(path),
     src,
   }))
-  .filter((p) => !hoofdsponsors.some((h) => p.name.toLowerCase().includes(h.toLowerCase())))
   .sort((a, b) => {
     const aIdx = priorityOrder.findIndex((p) => a.name.toLowerCase().includes(p.toLowerCase()));
     const bIdx = priorityOrder.findIndex((p) => b.name.toLowerCase().includes(p.toLowerCase()));
@@ -155,7 +152,7 @@ const Partners = () => {
                 <img
                   src={partner.src}
                   alt={partner.name}
-                  className="partners-page__card-logo partners-page__card-logo--color"
+                  className="partners-page__card-logo"
                 />
               </motion.a>
             ))}
@@ -180,7 +177,7 @@ const Partners = () => {
                 <img
                   src={partner.src}
                   alt={partner.name}
-                  className="partners-page__card-logo partners-page__card-logo--color"
+                  className="partners-page__card-logo"
                 />
               </motion.a>
             ))}
