@@ -4,6 +4,22 @@ import Footer from '../components/Footer';
 import './Page.css';
 import './Lineup.css';
 
+const artistArtworkModules = import.meta.glob('../public/Line-Up/*.{jpg,jpeg,png,JPG,JPEG,PNG}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const artists = Object.entries(artistArtworkModules)
+  .map(([path, src]) => {
+    const file = path.split('/').pop() ?? '';
+    const name = file.replace(/\.[^.]+$/, '').split(' - ')[0].trim();
+    return { name, src };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const TOTAL_SLOTS = 8;
+const tbaSlots = Math.max(0, TOTAL_SLOTS - artists.length);
+
 const Lineup = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,9 +73,23 @@ const Lineup = () => {
               initial="hidden"
               animate="visible"
             >
-              {Array.from({ length: 8 }).map((_, i) => (
+              {artists.map((artist) => (
                 <motion.div
-                  key={i}
+                  key={artist.name}
+                  className="lineup-card lineup-card--artist"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <img
+                    src={artist.src}
+                    alt={artist.name}
+                    className="lineup-card__image"
+                  />
+                </motion.div>
+              ))}
+              {Array.from({ length: tbaSlots }).map((_, i) => (
+                <motion.div
+                  key={`tba-${i}`}
                   className="lineup-card"
                   variants={cardVariants}
                   whileHover={{ scale: 1.05 }}
