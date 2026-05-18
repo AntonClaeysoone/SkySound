@@ -47,6 +47,7 @@ const partnerLinks: Record<string, string> = {
   'Brussels Airport': 'https://www.brusselsairport.be/nl/passengers',
   'Coffral': 'https://www.coffral.com',
   'Hertog Jan': 'https://www.residentiehertogjan.be',
+  'Krivaro': 'https://krivaro-technics.be',
 };
 
 const getPartnerLink = (name: string): string | undefined => {
