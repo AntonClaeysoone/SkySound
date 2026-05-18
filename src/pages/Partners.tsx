@@ -34,6 +34,7 @@ const hoofdsponsorsRow2 = [
   'Brussels Airport',
   'Coffral',
   'Hertog Jan',
+  'Krivaro',
 ];
 
 const partnerLinks: Record<string, string> = {
