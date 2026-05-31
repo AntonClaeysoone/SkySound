@@ -13,12 +13,23 @@ const artists = Object.entries(artistArtworkModules)
   .map(([path, src]) => {
     const file = path.split('/').pop() ?? '';
     const name = file.replace(/\.[^.]+$/, '').split(' - ')[0].trim();
-    return { name, src };
+    return { name, src, file };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
-const TOTAL_SLOTS = 8;
-const tbaSlots = Math.max(0, TOTAL_SLOTS - artists.length);
+// Pyramid layout: VIKTOR headlines on top, supporting artists fill the rows below.
+const headliner =
+  artists.find((a) => a.file.toUpperCase().includes('VIKTOR')) ?? artists[0];
+const supporting = artists.filter((a) => a !== headliner);
+
+const SECOND_ROW_SLOTS = 2;
+const THIRD_ROW_SLOTS = 3;
+
+const secondRow = Array.from({ length: SECOND_ROW_SLOTS }, (_, i) => supporting[i] ?? null);
+const thirdRow = Array.from(
+  { length: THIRD_ROW_SLOTS },
+  (_, i) => supporting[SECOND_ROW_SLOTS + i] ?? null
+);
 
 const Lineup = () => {
   const containerVariants = {
@@ -44,13 +55,29 @@ const Lineup = () => {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.85, y: 40 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.4 },
+      y: 0,
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
     },
   };
+
+  // Each pyramid tier reveals with a staggered slide-up as it scrolls into view.
+  const rowVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.12 },
+    },
+  };
+
+  const rowInView = {
+    initial: 'hidden',
+    whileInView: 'visible',
+    viewport: { once: true, amount: 0.4 },
+    variants: rowVariants,
+  } as const;
 
   return (
     <div className="page">
@@ -61,43 +88,76 @@ const Lineup = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="page__header" variants={itemVariants}>
-          <h1 className="page__title">ARTIST LINE UP</h1>
-        </motion.div>
-
         <motion.div className="page__body" variants={itemVariants}>
           <section className="lineup-cards-section">
-            <motion.div
-              className="lineup-cards-grid"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {artists.map((artist) => (
-                <motion.div
-                  key={artist.name}
-                  className="lineup-card lineup-card--artist"
-                  variants={cardVariants}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <img
-                    src={artist.src}
-                    alt={artist.name}
-                    className="lineup-card__image"
-                  />
-                </motion.div>
-              ))}
-              {Array.from({ length: tbaSlots }).map((_, i) => (
-                <motion.div
-                  key={`tba-${i}`}
-                  className="lineup-card"
-                  variants={cardVariants}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <span className="lineup-card__text">MORE TBA</span>
-                </motion.div>
-              ))}
-            </motion.div>
+            <div className="lineup-pyramid">
+              {/* Top — headliner */}
+              <motion.div className="lineup-row lineup-row--headliner" {...rowInView}>
+                {headliner && (
+                  <motion.div
+                    className="lineup-card lineup-card--artist"
+                    variants={cardVariants}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <img
+                      src={headliner.src}
+                      alt={headliner.name}
+                      className="lineup-card__image"
+                    />
+                  </motion.div>
+                )}
+              </motion.div>
+
+              {/* Second row — 2 slots */}
+              <motion.div className="lineup-row lineup-row--second" {...rowInView}>
+                {secondRow.map((artist, i) =>
+                  artist ? (
+                    <motion.div
+                      key={artist.name}
+                      className="lineup-card lineup-card--artist"
+                      variants={cardVariants}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <img src={artist.src} alt={artist.name} className="lineup-card__image" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={`row2-tba-${i}`}
+                      className="lineup-card"
+                      variants={cardVariants}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <span className="lineup-card__text">COMING SOON</span>
+                    </motion.div>
+                  )
+                )}
+              </motion.div>
+
+              {/* Third row — 3 slots */}
+              <motion.div className="lineup-row lineup-row--third" {...rowInView}>
+                {thirdRow.map((artist, i) =>
+                  artist ? (
+                    <motion.div
+                      key={artist.name}
+                      className="lineup-card lineup-card--artist"
+                      variants={cardVariants}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <img src={artist.src} alt={artist.name} className="lineup-card__image" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={`row3-tba-${i}`}
+                      className="lineup-card"
+                      variants={cardVariants}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <span className="lineup-card__text">COMING SOON</span>
+                    </motion.div>
+                  )
+                )}
+              </motion.div>
+            </div>
           </section>
 
           <section className="content-section">

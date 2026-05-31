@@ -7,10 +7,37 @@
   margin-bottom: 3rem;
 }
 
-.lineup-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+/* Pyramid layout: 1 headliner on top, then a 2-card row, then a 3-card row */
+.lineup-pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.lineup-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+}
+
+.lineup-row .lineup-card {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Headliner — bigger, centered on top */
+.lineup-row--headliner {
+  max-width: 220px;
+}
+
+.lineup-row--second {
+  max-width: 380px;
+}
+
+.lineup-row--third {
+  max-width: 540px;
 }
 
 .lineup-card {
@@ -51,18 +78,39 @@
 }
 
 @media (max-width: 768px) {
-  .lineup-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .lineup-pyramid,
+  .lineup-row {
     gap: 1rem;
+  }
+
+  .lineup-row--headliner {
+    max-width: 180px;
+  }
+
+  .lineup-row--second {
+    max-width: 300px;
+  }
+
+  .lineup-row--third {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .lineup-cards-grid {
+  .lineup-pyramid,
+  .lineup-row {
     gap: 0.75rem;
+  }
+
+  .lineup-row--headliner {
+    max-width: 200px;
   }
 
   .lineup-card {
     border-radius: 10px;
+  }
+
+  .lineup-card__text {
+    font-size: clamp(0.7rem, 2.5vw, 0.95rem);
   }
 }
