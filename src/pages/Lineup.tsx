@@ -23,9 +23,9 @@ const artists = [
   { keyword: 'VIKTOR', name: 'Viktor', headliner: true, secret: false },
   { keyword: 'LICIOUS', name: 'DJ Licious', headliner: false, secret: false },
   { keyword: 'MANUALS', name: 'Manuals & Meaghan', headliner: false, secret: false },
+  { keyword: 'CTRACK', name: 'C-Track', headliner: false, secret: false },
+  { keyword: 'BLUSHXBLUSH', name: 'Blush x Blush', headliner: false, secret: false },
   { keyword: 'SECRET-1', name: '', headliner: false, secret: true },
-  { keyword: 'SECRET-2', name: '', headliner: false, secret: true },
-  { keyword: 'SECRET-3', name: '', headliner: false, secret: true },
 ]
   .map((a) => ({ ...a, src: a.secret ? '' : findArtwork(a.keyword) }))
   .filter((a) => a.secret || a.src);
