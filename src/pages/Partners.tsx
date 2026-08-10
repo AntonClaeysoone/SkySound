@@ -221,7 +221,7 @@ const Partners = () => {
             className="partner-worden__form"
             onSubmit={(e) => {
               e.preventDefault();
-              window.location.href = `mailto:contact@skysoundfestival.com?subject=Partner worden&body=Email: ${email}`;
+              window.location.href = `mailto:info@skysoundfestival.com?subject=Partner worden&body=Email: ${email}`;
             }}
           >
             <input

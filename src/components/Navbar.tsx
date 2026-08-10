@@ -24,6 +24,8 @@ const Navbar = () => {
     { name: 'Tickets', href: TICKET_URL, external: true },
     { name: 'Line-Up', href: '/lineup', external: false },
     { name: 'Partners', href: '/partners', external: false },
+    { name: "Foto's", href: '/photos', external: false },
+    { name: 'FAQ', href: '/faq', external: false },
     { name: 'About', href: '/about', external: false },
     { name: 'Contact', href: '/contact', external: false },
   ];

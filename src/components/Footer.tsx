@@ -10,6 +10,8 @@ const Footer = () => {
     { name: 'Tickets', href: '/tickets' },
     { name: 'Line-Up', href: '/lineup' },
     { name: 'Partners', href: '/partners' },
+    { name: "Foto's", href: '/photos' },
+    { name: 'FAQ', href: '/faq' },
     { name: 'About', href: '/about' },
     { name: 'Practical Info', href: '/practical' },
     { name: 'Contact', href: '/contact' },
@@ -102,8 +104,8 @@ const Footer = () => {
             <p className="footer__text">8 August 2026</p>
             <p className="footer__text">Erps-Kwerps, Belgium</p>
             <p className="footer__text">
-              <a href="mailto:contact@skysoundfestival.com" className="footer__link">
-                contact@skysoundfestival.com
+              <a href="mailto:info@skysoundfestival.com" className="footer__link">
+                info@skysoundfestival.com
               </a>
             </p>
           </motion.div>

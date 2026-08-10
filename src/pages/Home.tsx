@@ -153,6 +153,40 @@ const Home = () => {
         </motion.div>
       </section>
 
+      {/* Teaser volgende editie - departures board */}
+      <section className="home-section home-section--teaser" id="skysound-2027">
+        <div className="home-section__container">
+          <motion.div
+            className="teaser-board"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="teaser-board__header">
+              <span className="teaser-board__header-label">SkySound · Departures</span>
+              <span className="teaser-board__header-dot" aria-hidden />
+            </div>
+            <div className="teaser-board__row teaser-board__row--labels" aria-hidden>
+              <span>Vlucht</span>
+              <span>Bestemming</span>
+              <span>Vertrek</span>
+              <span>Status</span>
+            </div>
+            <div className="teaser-board__row">
+              <span className="teaser-board__cell">SKY27</span>
+              <span className="teaser-board__cell">Erps-Kwerps</span>
+              <span className="teaser-board__cell">07 AUG 2027</span>
+              <span className="teaser-board__cell teaser-board__cell--status">Save the date</span>
+            </div>
+            <p className="teaser-board__tagline">
+              De volgende vlucht is aangekondigd. SkySound stijgt opnieuw op — zet zaterdag{' '}
+              <strong>7 augustus 2027</strong> alvast in je agenda!
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Wat is SkySound? - White section */}
       <section className="home-section home-section--white" id="wat-is-skysound">
         <div className="home-section__container">

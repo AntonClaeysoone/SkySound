@@ -43,8 +43,8 @@ const Contact = () => {
           <section className="content-section">
             <h2 className="content-section__title">Get in Touch</h2>
             <p className="content-section__text">
-              <a href="mailto:contact@skysoundfestival.com" className="content-section__link content-section__link--large">
-                contact@skysoundfestival.com
+              <a href="mailto:info@skysoundfestival.com" className="content-section__link content-section__link--large">
+                info@skysoundfestival.com
               </a>
             </p>
           </section>
