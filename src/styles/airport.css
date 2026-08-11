@@ -1,0 +1,140 @@
+/* ============================================================
+   SkySound airport design kit — shared, site-wide utilities.
+   Motifs come from the festival's own materials: the "TIME FOR
+   TAKE-OFF" booth print, flight strips, FIDS boards, gate signs.
+   ============================================================ */
+
+/* Screen-reader-only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mono utility label — the FIDS/flight-strip voice */
+.mono-label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Gate tag — eyebrow above section titles: "GATE 02 · BOARDING" */
+.gate-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1rem;
+}
+
+.gate-tag::before {
+  content: '';
+  width: 0.55em;
+  height: 0.55em;
+  background: var(--sky-red);
+  flex-shrink: 0;
+}
+
+.home-section--white .gate-tag {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.home-section--red .gate-tag {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.home-section--red .gate-tag::before {
+  background: var(--sky-white);
+}
+
+/* Flight strip — bordered mono chip: "SKY27 · 07 AUG 2027 · ERPS-KWERPS" */
+.flight-strip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+}
+
+/* Dashed flight-path divider with a centered plane */
+.flight-divider {
+  --divider-bg: #000;
+  position: relative;
+  border: 0;
+  border-top: 2px dashed rgba(255, 255, 255, 0.25);
+  margin: 0;
+}
+
+.flight-divider::after {
+  content: '✈';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--divider-bg);
+  padding: 0 0.75em;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+.flight-divider--on-white {
+  --divider-bg: #fff;
+  border-top-color: rgba(0, 0, 0, 0.2);
+}
+
+.flight-divider--on-white::after {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.flight-divider--on-red {
+  --divider-bg: #d6212b;
+  border-top-color: rgba(255, 255, 255, 0.35);
+}
+
+.flight-divider--on-red::after {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Decorative barcode strip (always aria-hidden in markup) */
+.barcode {
+  display: inline-block;
+  height: 2.2em;
+  min-width: 7em;
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0 2px,
+    transparent 2px 5px,
+    currentColor 5px 6px,
+    transparent 6px 9px,
+    currentColor 9px 12px,
+    transparent 12px 14px
+  );
+  opacity: 0.85;
+}
+
+/* Reduced motion: stop CSS-driven blinking/shimmer site-wide.
+   (framer-motion loops are gated in JS via useReducedMotion.) */
+@media (prefers-reduced-motion: reduce) {
+  .teaser-board__header-dot,
+  .teaser-board__cell--status,
+  .photos-placeholder {
+    animation: none !important;
+  }
+}

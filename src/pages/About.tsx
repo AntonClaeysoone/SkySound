@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import photoPlane from '../public/SkySound2026/web/20260808_Skysound-12.jpg';
 import './Page.css';
+import './About.css';
 
 const About = () => {
   const containerVariants = {
@@ -56,6 +58,18 @@ const About = () => {
             <p className="content-section__text">
               Vandaag zet SKYSOUND de volgende stap, met zijn allereerste fysieke editie. Deze gaat door in Erps-Kwerps, op een unieke locatie onder de aanvliegroute van Zaventem. Dit zorgt voor een uitzonderlijke setting waarbij vliegtuigen op lage hoogte overvliegen terwijl bezoekers genieten van muziek en sfeer op het terrein.
             </p>
+            <motion.figure className="about-photo" variants={itemVariants}>
+              <img
+                src={photoPlane}
+                alt="Dj-duo viert achter de decks terwijl een lijnvliegtuig laag overvliegt"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption className="mono-label">
+                Overhead pass · Approach BRU · SKY26
+              </figcaption>
+            </motion.figure>
+            <hr className="flight-divider about-divider" aria-hidden />
             <p className="content-section__text">
               Met een zorgvuldig gecureerde line-up, een sterk uitgewerkt thema en een duidelijke visie wil SKYSOUND een ervaring neerzetten die blijft hangen — een festival dat je niet alleen bezoekt, maar écht beleeft.
             </p>

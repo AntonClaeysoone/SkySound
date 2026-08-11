@@ -1,3 +1,15 @@
+:root {
+  --sky-red: #d6212b;
+  --sky-red-dark: #b01b23;
+  --sky-black: #000000;
+  --sky-white: #ffffff;
+  --sky-off-white: #f5f2ec;
+  --sky-amber: #f2a33c;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
 * {
   margin: 0;
   padding: 0;

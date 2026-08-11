@@ -1,22 +1,32 @@
-import { motion } from 'framer-motion';
+import { useMemo, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Lightbox from '../components/Lightbox';
+import { CATEGORY_LABELS, festivalPhotos, PhotoCategory } from '../data/photos';
 import './Page.css';
 import './Photos.css';
 
-// Foto's die in src/public/Photos/ worden geplaatst, verschijnen hier automatisch.
-const photoModules = import.meta.glob('../public/Photos/*.{jpg,jpeg,png,JPG,JPEG,PNG,webp}', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>;
+type Filter = 'all' | PhotoCategory;
 
-const photos = Object.entries(photoModules).map(([path, src]) => ({
-  path,
-  src,
-  name: path.split('/').pop() ?? 'SkySound 2026',
-}));
+const FILTERS: Array<{ value: Filter; label: string }> = [
+  { value: 'all', label: 'Alle' },
+  { value: 'night', label: CATEGORY_LABELS.night },
+  { value: 'golden', label: CATEGORY_LABELS.golden },
+  { value: 'crew', label: CATEGORY_LABELS.crew },
+  { value: 'passengers', label: CATEGORY_LABELS.passengers },
+];
 
 const Photos = () => {
+  const [filter, setFilter] = useState<Filter>('all');
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const lastTileRef = useRef<HTMLElement | null>(null);
+
+  const visiblePhotos = useMemo(
+    () => (filter === 'all' ? festivalPhotos : festivalPhotos.filter((p) => p.category === filter)),
+    [filter]
+  );
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,6 +49,11 @@ const Photos = () => {
     },
   };
 
+  const closeLightbox = () => {
+    setOpenIndex(null);
+    lastTileRef.current?.focus();
+  };
+
   return (
     <div className="page">
       <Navbar />
@@ -49,47 +64,78 @@ const Photos = () => {
         animate="visible"
       >
         <motion.div className="page__header" variants={itemVariants}>
-          <h1 className="page__title">Foto's</h1>
+          <h1 className="page__title">Flight log</h1>
+          <p className="photos-strip mono-label">
+            SKY26 · Geland 08 aug 2026 · {festivalPhotos.length} beelden
+          </p>
         </motion.div>
 
         <motion.div className="page__body" variants={itemVariants}>
-          {photos.length > 0 ? (
-            <section className="content-section">
-              <h2 className="content-section__title">SkySound 2026</h2>
-              <div className="photos-grid">
-                {photos.map((photo, index) => (
-                  <motion.div
-                    key={photo.path}
+          <section className="content-section">
+            <div className="photos-filters" role="group" aria-label="Filter foto's">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.value}
+                  type="button"
+                  className={`photos-filter${filter === f.value ? ' photos-filter--active' : ''}`}
+                  aria-pressed={filter === f.value}
+                  onClick={() => {
+                    setFilter(f.value);
+                    setOpenIndex(null);
+                  }}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="photos-grid">
+              <AnimatePresence mode="popLayout">
+                {visiblePhotos.map((photo, index) => (
+                  <motion.button
+                    key={photo.file}
+                    type="button"
+                    layout
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.92 }}
+                    transition={{ duration: 0.3 }}
                     className="photos-grid__item"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: (index % 6) * 0.05 }}
+                    onClick={(event) => {
+                      lastTileRef.current = event.currentTarget;
+                      setOpenIndex(index);
+                    }}
+                    aria-label={`Bekijk foto: ${photo.alt}`}
                   >
-                    <img src={photo.src} alt={`SkySound 2026 - ${photo.name}`} loading="lazy" />
-                  </motion.div>
+                    <img
+                      src={photo.src}
+                      alt=""
+                      width={photo.portrait ? 1280 : 1600}
+                      height={photo.portrait ? 1600 : 1067}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="photos-grid__caption mono-label" aria-hidden>
+                      {photo.caption ?? `SKY26 · ${photo.file.replace(/\D/g, '').slice(-2)}`}
+                    </span>
+                  </motion.button>
                 ))}
-              </div>
-            </section>
-          ) : (
-            <section className="content-section">
-              <h2 className="content-section__title">Binnenkort online</h2>
-              <p className="content-section__text">
-                Wat een vlucht was dat! De foto's van <strong>SkySound 2026</strong> worden
-                momenteel verzameld en verschijnen hier binnenkort. Kom dus zeker nog eens terug —
-                of hou onze socials in de gaten voor de eerste beelden.
-              </p>
-              <div className="photos-placeholder-grid" aria-hidden>
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <div key={index} className="photos-placeholder">
-                    <span className="photos-placeholder__icon">✈</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+              </AnimatePresence>
+            </div>
+          </section>
         </motion.div>
       </motion.main>
+
+      <AnimatePresence>
+        {openIndex !== null && (
+          <Lightbox
+            photos={visiblePhotos}
+            index={openIndex}
+            onClose={closeLightbox}
+            onNavigate={setOpenIndex}
+          />
+        )}
+      </AnimatePresence>
       <Footer />
     </div>
   );

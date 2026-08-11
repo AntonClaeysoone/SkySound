@@ -1,0 +1,36 @@
+/* Split-flap (Solari) letterbakjes voor het vertrekbord */
+.flap-text {
+  display: inline-flex;
+  flex-wrap: nowrap; /* een cel breekt nooit over twee regels */
+  gap: 1px;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.flap-char {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15ch;
+  flex-shrink: 0;
+  padding: 0.12em 0;
+  background: linear-gradient(180deg, #1c1c1c 0%, #111 48%, #060606 52%, #141414 100%);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 1px 2px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  letter-spacing: 0; /* spatiëring zit tussen de bakjes, niet in het glyph */
+}
+
+/* Het scharnier: de horizontale naad tussen boven- en onderflap */
+.flap-char::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.85);
+}

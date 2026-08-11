@@ -1,0 +1,37 @@
+.not-found {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-bottom: 6rem;
+}
+
+.not-found__code {
+  color: var(--sky-amber);
+}
+
+.not-found__text {
+  max-width: 46ch;
+}
+
+.not-found__button {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: #fff;
+  background: var(--sky-red);
+  border: 2px solid var(--sky-red);
+  border-radius: 12px;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.not-found__button:hover {
+  background: var(--sky-red-dark);
+  border-color: var(--sky-red-dark);
+}

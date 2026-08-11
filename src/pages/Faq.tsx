@@ -70,14 +70,14 @@ const faqItems = [
     ),
   },
   {
-    question: "Wanneer komen de foto's online?",
+    question: "Waar vind ik de foto's?",
     answer: (
       <>
-        De foto's van SkySound 2026 worden momenteel verzameld en komen binnenkort online. Hou de{' '}
+        De foto's van SkySound 2026 staan online! Bekijk ze in het{' '}
         <Link to="/photos" className="content-section__link">
-          foto-pagina
-        </Link>{' '}
-        in de gaten!
+          flight log
+        </Link>
+        .
       </>
     ),
   },
